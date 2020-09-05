@@ -20,14 +20,15 @@ var coffees = [
 ];
 
 // DOM ELEMENTS
-
+// Sorting Selector Element
 var selection = document.querySelector('#roast-selection');
 selection.addEventListener('change', updateCoffees);
 
+// Coffee Menu Element
 var coffeeMenu = document.querySelector('#coffees');
 coffeeMenu.innerHTML = renderCoffees(coffees);
 
-
+// Coffee Creation Selector
 var roastSelection = document.querySelector('#roast-selection2');
 var submitButton = document.querySelector("#submit");
 submitButton.addEventListener('click', addACoffee);
@@ -35,7 +36,7 @@ submitButton.addEventListener('click', addACoffee);
 
 // CREATE COFFEE MENU
 function renderCoffee(coffee) {
-    var html = '<div class="col-6 coffee">';
+    var html = '<div id="menu-option" class="col-6 coffee">';
     html += '<h4>' + coffee.name + '</h4>';
     html += '<p>' + coffee.roast + '</p>';
     html += '</div>';

@@ -1,9 +1,8 @@
-table {
-    border-collapse: collapse;
-    margin: 15px 0;
+container {
+
 }
 
-td, th {
-    border: 1px solid black;
-    padding: 5px 10px;
+#menu-option {
+    border: black 1px solid;
+    text-align: center;
 }
