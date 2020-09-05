@@ -1,40 +1,7 @@
 "use strict"
 
-function renderCoffee(coffee) {
-    var html = '<div class="col-6 coffee">';
-    html += '<h4>' + coffee.name + '</h4>';
-    html += '<p>' + coffee.roast + '</p>';
-    html += '</div>';
-
-    return html;
-}
-
-function renderCoffees(coffees) {
-    var html = '';
-
-    for(var i = coffees.length - 1; i >= 0; i--) {
-        html += renderCoffee(coffees[i]);
-    }
-    return html;
-}
-
-function updateCoffees(e) {
-    e.preventDefault(); // don't submit the form, we just want to update the data
-    var selectedRoast = roastSelection.value;
-    var filteredCoffees = [];
-    coffees.forEach(function(coffee) {
-        if (coffee.roast === selectedRoast) {
-            filteredCoffees.push(coffee);
-        }
-        if (selectedRoast === "all") {
-            filteredCoffees.push(coffee)
-        }
-
-    });
-    coffeeMenu.innerHTML = renderCoffees(filteredCoffees.reverse());
-}
-
 // from http://www.ncausa.org/About-Coffee/Coffee-Roasts-Guide
+// ARRAY OF COFFEES
 var coffees = [
     {id: 1, name: 'Light City', roast: 'light'},
     {id: 2, name: 'Half City', roast: 'light'},
@@ -52,32 +19,56 @@ var coffees = [
     {id: 14, name: 'French', roast: 'dark'},
 ];
 
-var coffeeMenu = document.querySelector('#coffees');
-var selection = document.querySelector('#roast-selection');
-var submitButton2 = document.querySelector("#submit2");
-var roastSelection = document.querySelector('#roast-selection');
+// DOM ELEMENTS
 
+var selection = document.querySelector('#roast-selection');
+selection.addEventListener('change', updateCoffees);
+
+var coffeeMenu = document.querySelector('#coffees');
 coffeeMenu.innerHTML = renderCoffees(coffees);
 
-selection.addEventListener('change', updateCoffees);
-submitButton2.addEventListener('click', addACoffee);
 
-function addACoffee(e) {
-    e.preventDefault();
-    var coffeeName = document.getElementById("nameAdded").value;
-    var coffeeRoast = document.getElementById("roast-selection2").value;
-    var newCoffee = {
-        id: coffees.length + 1,
-        name: coffeeName,
-        roast: coffeeRoast
+var roastSelection = document.querySelector('#roast-selection2');
+var submitButton = document.querySelector("#submit");
+submitButton.addEventListener('click', addACoffee);
+
+
+// CREATE COFFEE MENU
+function renderCoffee(coffee) {
+    var html = '<div class="col-6 coffee">';
+    html += '<h4>' + coffee.name + '</h4>';
+    html += '<p>' + coffee.roast + '</p>';
+    html += '</div>';
+
+    return html;
+}
+function renderCoffees(coffees) {
+    var html = '';
+
+    for(var i = coffees.length - 1; i >= 0; i--) {
+        html += renderCoffee(coffees[i]);
     }
-    coffees.push(newCoffee);
-    console.log(coffees);
-    // localStorage.setItem('customCoffees', JSON.stringify(coffees));
-    coffeeMenu.innerHTML = renderCoffees(coffees);
-
+    return html;
 }
 
+// FILTER COFFEE MENU BASED ON ROAST SELECTION
+function updateCoffees(e) {
+    e.preventDefault(); // don't submit the form, we just want to update the data
+    var selectedRoast = selection.value;
+    var filteredCoffees = [];
+    coffees.forEach(function(coffee) {
+        if (coffee.roast === selectedRoast) {
+            filteredCoffees.push(coffee);
+        }
+        if (selectedRoast === "all") {
+            filteredCoffees.push(coffee)
+        }
+
+    });
+    coffeeMenu.innerHTML = renderCoffees(filteredCoffees.reverse());
+}
+
+// SEARCH FOR A COFFEE IN THE SYSTEM
 function mySearchFunction () {
     var searchedCoffees = [];
     var input = document.getElementById("coffeeName");
@@ -89,4 +80,18 @@ function mySearchFunction () {
         }
     })
     coffeeMenu.innerHTML = renderCoffees(searchedCoffees.reverse());
+}
+
+// ADD A COFFEE TO THE COFFEE MENU
+function addACoffee(e) {
+    e.preventDefault();
+    var coffeeName = document.getElementById("nameAdded").value;
+    var newCoffee = {
+        id: coffees.length + 1,
+        name: coffeeName,
+        roast: roastSelection.value
+    }
+    coffees.push(newCoffee);
+    coffeeMenu.innerHTML = renderCoffees(coffees);
+
 }
