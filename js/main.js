@@ -53,13 +53,13 @@ var coffees = [
 ];
 
 var coffeeMenu = document.querySelector('#coffees');
-var submitButton = document.querySelector('#submit');
+var selection = document.querySelector('#roast-selection');
 var submitButton2 = document.querySelector("#submit2");
 var roastSelection = document.querySelector('#roast-selection');
 
 coffeeMenu.innerHTML = renderCoffees(coffees);
 
-submitButton.addEventListener('click', updateCoffees);
+selection.addEventListener('change', updateCoffees);
 submitButton2.addEventListener('click', addACoffee);
 
 function addACoffee(e) {
