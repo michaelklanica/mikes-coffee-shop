@@ -1,6 +1,6 @@
 "use strict"
 
-function renderCoffee(coffee) {                       // This code creates HTML to display the Coffee Name, Roast and ID
+function renderCoffee(coffee) {
     var html = '<div class="col-6 coffee">';
     html += '<h4>' + coffee.name + '</h4>';
     html += '<p>' + coffee.roast + '</p>';
@@ -9,17 +9,16 @@ function renderCoffee(coffee) {                       // This code creates HTML 
     return html;
 }
 
-function renderCoffees(coffees) {                   // THIS CODE SHOULD NOT HAVE TO CHANGE
-    var html = '';                                  // This code combines the HTML for each coffee created by the
-                                                    // renderCoffee function.
+function renderCoffees(coffees) {
+    var html = '';
+
     for(var i = coffees.length - 1; i >= 0; i--) {
         html += renderCoffee(coffees[i]);
     }
     return html;
 }
 
-function updateCoffees(e) {                         // THIS CODE SHOULD NOT HAVE TO CHANGE
-    // This code filters the array of coffees based on the roast.
+function updateCoffees(e) {
     e.preventDefault(); // don't submit the form, we just want to update the data
     var selectedRoast = roastSelection.value;
     var filteredCoffees = [];
@@ -32,12 +31,12 @@ function updateCoffees(e) {                         // THIS CODE SHOULD NOT HAVE
         }
 
     });
-    tbody.innerHTML = renderCoffees(filteredCoffees.reverse());
+    coffeeMenu.innerHTML = renderCoffees(filteredCoffees.reverse());
 }
 
 // from http://www.ncausa.org/About-Coffee/Coffee-Roasts-Guide
-var coffees = [                                     // THIS CODE SHOULD NOT HAVE TO CHANGE
-    {id: 1, name: 'Light City', roast: 'light'},    // This is the the array of coffee info
+var coffees = [
+    {id: 1, name: 'Light City', roast: 'light'},
     {id: 2, name: 'Half City', roast: 'light'},
     {id: 3, name: 'Cinnamon', roast: 'light'},
     {id: 4, name: 'City', roast: 'medium'},
@@ -53,17 +52,18 @@ var coffees = [                                     // THIS CODE SHOULD NOT HAVE
     {id: 14, name: 'French', roast: 'dark'},
 ];
 
-var tbody = document.querySelector('#coffees');
+var coffeeMenu = document.querySelector('#coffees');
 var submitButton = document.querySelector('#submit');
 var submitButton2 = document.querySelector("#submit2");
 var roastSelection = document.querySelector('#roast-selection');
 
-tbody.innerHTML = renderCoffees(coffees);
+coffeeMenu.innerHTML = renderCoffees(coffees);
 
 submitButton.addEventListener('click', updateCoffees);
 submitButton2.addEventListener('click', addACoffee);
 
-function addACoffee() {
+function addACoffee(e) {
+    e.preventDefault();
     var coffeeName = document.getElementById("nameAdded").value;
     var coffeeRoast = document.getElementById("roast-selection2").value;
     var newCoffee = {
@@ -73,8 +73,8 @@ function addACoffee() {
     }
     coffees.push(newCoffee);
     console.log(coffees);
-    localStorage.setItem('customCoffees', JSON.stringify(coffees));
-    tbody.innerHTML = renderCoffees(coffees);
+    // localStorage.setItem('customCoffees', JSON.stringify(coffees));
+    coffeeMenu.innerHTML = renderCoffees(coffees);
 
 }
 
@@ -88,5 +88,5 @@ function mySearchFunction () {
             console.log(searchedCoffees);
         }
     })
-    tbody.innerHTML = renderCoffees(searchedCoffees.reverse());
+    coffeeMenu.innerHTML = renderCoffees(searchedCoffees.reverse());
 }
