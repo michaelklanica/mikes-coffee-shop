@@ -2,7 +2,23 @@ container {
 
 }
 
+.main-header {
+    height: 2em;
+
+}
+
 #menu-option {
-    border: black 1px solid;
-    text-align: center;
+    border: 1px dotted #204000;
+}
+
+body {
+    font-family: 'Righteous', cursive;
+    background-color: darkgoldenrod;
+    color: #204000;
+}
+
+#submit {
+    background-color: #204000;
+    color: darkgoldenrod;
+    border: 0;
 }

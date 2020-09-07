@@ -9,14 +9,15 @@ var coffees = [
     {id: 4, name: 'City', roast: 'medium'},
     {id: 5, name: 'American', roast: 'medium'},
     {id: 6, name: 'Breakfast', roast: 'medium'},
-    {id: 7, name: 'High', roast: 'dark'},
-    {id: 8, name: 'Continental', roast: 'dark'},
-    {id: 9, name: 'New Orleans', roast: 'dark'},
-    {id: 10, name: 'European', roast: 'dark'},
-    {id: 11, name: 'Espresso', roast: 'dark'},
-    {id: 12, name: 'Viennese', roast: 'dark'},
-    {id: 13, name: 'Italian', roast: 'dark'},
-    {id: 14, name: 'French', roast: 'dark'},
+    {id: 7, name: 'Full City', roast: 'medium-dark'},
+    {id: 8, name: 'High', roast: 'dark'},
+    {id: 9, name: 'Continental', roast: 'dark'},
+    {id: 10, name: 'New Orleans', roast: 'dark'},
+    {id: 11, name: 'European', roast: 'dark'},
+    {id: 12, name: 'Espresso', roast: 'dark'},
+    {id: 13, name: 'Viennese', roast: 'dark'},
+    {id: 14, name: 'Italian', roast: 'dark'},
+    {id: 15, name: 'French', roast: 'dark'},
 ];
 
 // DOM ELEMENTS
@@ -36,8 +37,8 @@ submitButton.addEventListener('click', addACoffee);
 
 // CREATE COFFEE MENU
 function renderCoffee(coffee) {
-    var html = '<div id="menu-option" class="col-6 coffee">';
-    html += '<h4>' + coffee.name + '</h4>';
+    var html = '<div id="menu-option" class="col-4 coffee">';
+    html += '<h5>' + coffee.name + '</h5>';
     html += '<p>' + coffee.roast + '</p>';
     html += '</div>';
 
@@ -87,12 +88,17 @@ function mySearchFunction () {
 function addACoffee(e) {
     e.preventDefault();
     var coffeeName = document.getElementById("nameAdded").value;
-    var newCoffee = {
-        id: coffees.length + 1,
-        name: coffeeName,
-        roast: roastSelection.value
+    if (coffeeName.trim() === "") {
+        alert('You have not entered a name for your coffee.')
+    } else {
+        var newCoffee = {
+            id: coffees.length + 1,
+            name: coffeeName.trim(),
+            roast: roastSelection.value
+        }
+
+        coffees.push(newCoffee);
+        coffeeMenu.innerHTML = renderCoffees(coffees);
     }
-    coffees.push(newCoffee);
-    coffeeMenu.innerHTML = renderCoffees(coffees);
 
 }

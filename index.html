@@ -7,6 +7,8 @@
     <title>Coffee!</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
           integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -16,19 +18,11 @@
             <h1 class="main-header">Coffee!</h1>
         </div>
     </div>
-    <hr style="">
+    <hr>
     <div class="row">
         <div class="col-6">
             <div>
-                <h3>Coffee Menu</h3>
-            </div>
-            <div id="coffees" class="row">
-                <!--COFFEE MENU HERE (see main.js)-->
-            </div>
-        </div>
-        <div class="col-6">
-            <div>
-                <h3>Select a coffee</h3>
+                <h3>Select an existing coffee</h3>
             </div>
             <form>
                 <div class="form-group">
@@ -37,6 +31,7 @@
                         <option>all</option>
                         <option>light</option>
                         <option>medium</option>
+                        <option>medium-dark</option>
                         <option>dark</option>
                     </select>
                 </div>
@@ -49,13 +44,14 @@
             <hr>
             <form>
                 <div id="header d-flex">
-                    <h5>Add a Coffee</h5>
+                    <h5>Add a new Coffee</h5>
                 </div>
                 <div class="form-group">
                     <label for="roast-selection2">Roast</label>
                     <select id="roast-selection2" class="form-control">
                         <option>light</option>
                         <option>medium</option>
+                        <option>medium-dark</option>
                         <option>dark</option>
                     </select>
                 </div>
@@ -67,6 +63,15 @@
 
             </form>
         </div>
+        <div class="col-6">
+            <div>
+                <h3>Coffee Menu</h3>
+            </div>
+            <div id="coffees" class="row">
+                <!--COFFEE MENU HERE (see main.js)-->
+            </div>
+        </div>
+
     </div>
 </div>
 
